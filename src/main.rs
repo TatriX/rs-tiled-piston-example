@@ -48,21 +48,28 @@ fn main() {
                     }
 
                     let tile = tile - 1;
-                    let x = x as u32 * tile_width;
-                    let y = y as u32 * tile_height;
 
-                    let st = DrawState::default().scissor([x, y, tile_width, tile_height]);
-                    let dx = tile % (width / tile_width);
-                    let dy = tile / (width / tile_height);
+                    // rect of the particular tile in the tilesheet
+                    let src_rect = [
+                        (tile % (width / tile_width) * tile_width) as f64,
+                        (tile / (width / tile_height) * tile_height) as f64,
+                        tile_width as f64,
+                        tile_height as f64,
+                    ];
 
-                    let trans = c.transform
-                        .trans(-((dx * tile_width) as f64), -((dy * tile_height) as f64))
-                        .trans(x as f64, y as f64);
+                    let trans = c.transform.trans(
+                        x as f64 * tile_width as f64,
+                        y as f64 * tile_height as f64,
+                    );
 
-                    image.draw(&tilesheet, &st, trans, g);
+                    image.src_rect(src_rect).draw(
+                        &tilesheet,
+                        &DrawState::default(),
+                        trans,
+                        g,
+                    );
                 }
             }
         });
     }
-
 }
