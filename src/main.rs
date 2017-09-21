@@ -47,7 +47,7 @@ fn main() {
                         continue;
                     }
 
-                    let tile = tile - 1;
+                    let tile = tile - 1; // tiled counts from 1
 
                     // rect of the particular tile in the tilesheet
                     let src_rect = [
