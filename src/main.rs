@@ -15,7 +15,7 @@ fn main() {
     let map = parse(file).unwrap();
 
     let opengl = OpenGL::V3_2;
-    let mut window: PistonWindow = WindowSettings::new("piston: image", [600, 600])
+    let mut window: PistonWindow = WindowSettings::new("piston: tiled", [600, 600])
         .exit_on_esc(true)
         .opengl(opengl)
         .build()
